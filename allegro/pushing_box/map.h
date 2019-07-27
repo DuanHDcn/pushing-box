@@ -1,38 +1,31 @@
 #ifndef MAP__
 #define MAP__
 
-#define MAN_UP				(0)
-#define MAN_DOWN			(1)
-#define MAN_LEFT			(2)
-#define MAN_RIGHT			(3)
-#define BOX					(4)
-#define MAN_UP_TARGET		(5)
-#define MAN_DOWN_TARGET		(6)
-#define MAN_LEFT_TARGET		(7)
-#define MAN_RIGHT_TARGET	(8)
-#define BOX_TARGET			(9)
-#define WALL				(10)
-#define TARGET				(11)
-#define ROAD				(12)
-#define TARGET2BASE			(-5)
-#define BASE2TARGET			(+5)
-#define IS_TARGET(x)		(x >= 5 && x <= 9)
+#include "entity.h"
 
-#define NONE				(-1)
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 
-int map_stage_0[10][10] =
-{
-	NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE,
-	NONE, NONE, NONE, WALL, WALL, WALL, WALL, NONE, NONE, NONE,
-	NONE, NONE, NONE, WALL, ROAD, ROAD, WALL, WALL, WALL, NONE,
-	NONE, WALL, WALL, WALL, BOX, ROAD, ROAD, ROAD, WALL, NONE,
-	NONE, WALL, ROAD, ROAD, TARGET, TARGET, ROAD, ROAD, WALL, NONE,
-	NONE, WALL, ROAD, BOX, ROAD, TARGET, ROAD, ROAD, WALL, NONE,
-	NONE, WALL, WALL, WALL, ROAD, BOX, WALL, WALL, WALL, NONE,
-	NONE, NONE, NONE, WALL, ROAD, MAN_UP, WALL, NONE, NONE, NONE,
-	NONE, NONE, NONE, WALL, WALL, WALL, WALL, NONE, NONE, NONE,
-	NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE, NONE
-};
+#include <vector>
+
+enum Terrain { _none_terrain, _wall, _road, _target };
+
+void mapInit();
+void mapReset(int stage);
+void mapLoad(int stage);
+void mapConnect();
+void mapShow();
+void entityShow();
+void printTerrainMap();
+void printEntityMap();
+void printEntityPtr();
+void entityReset();
+void textShow(ALLEGRO_FONT *text);
+
+extern std::vector<std::vector<Terrain>> map;
+extern std::vector<std::vector<EntityType>> entity_map;
+extern std::vector<std::vector<void*>> entity_ptr;
 
 #endif // !MAP__
 
